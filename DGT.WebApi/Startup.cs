@@ -52,6 +52,14 @@ namespace DGT.WebApi
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+
+            var serviceScopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
+            using (var serviceScope = serviceScopeFactory.CreateScope())
+            {
+                var dbContext = serviceScope.ServiceProvider.GetService<DgtDbContext>();
+                dbContext.Database.EnsureCreated();
+            }
         }
     }
 }

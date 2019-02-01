@@ -8,8 +8,6 @@ namespace DGT.Data
         public DgtDbContext(DbContextOptions<DgtDbContext> options)
            : base(options)
         {
-            this.Database.EnsureCreated();
-
         }
 
         public DbSet<Driver> Drivers { get; set; }
