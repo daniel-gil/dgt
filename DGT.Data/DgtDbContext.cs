@@ -14,5 +14,6 @@ namespace DGT.Data
 
         public DbSet<Driver> Drivers { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<Infraction> Infractions { get; set; }
     }
 }
