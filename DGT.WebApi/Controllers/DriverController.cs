@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DGT.Data;
 using DGT.Models;
+using DGT.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,25 +16,26 @@ namespace DGT.WebApi.Controllers
     [ApiController]
     public class DriverController : ControllerBase
     {
-        private readonly DgtDbContext _context;
+        private readonly IDriverService driverService;
 
-        public DriverController(DgtDbContext context)
+        public DriverController(IDriverService driverService)
         {
-            _context = context;
+            this.driverService = driverService;
         }
 
         // GET: api/drivers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Driver>>> GetDrivers()
+        public ActionResult<IEnumerable<Driver>> GetDrivers()
         {
-            return await _context.Drivers.ToListAsync();
+            var list = driverService.GetDrivers();
+            return list.ToList();
         }
 
         // GET: api/drivers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Driver>> GetDriver(string id)
+        public ActionResult<Driver> GetDriver(string id)
         {
-            var driver = await _context.Drivers.FindAsync(id);
+            var driver = driverService.GetDriver(id);
             if (driver == null)
             {
                 return NotFound();
@@ -43,11 +45,9 @@ namespace DGT.WebApi.Controllers
 
         // POST: api/drivers
         [HttpPost]
-        public async Task<ActionResult<Driver>> CreateDriver(Driver item)
+        public ActionResult<Driver> CreateDriver(Driver item)
         {
-            _context.Drivers.Add(item);
-            await _context.SaveChangesAsync();
-
+            driverService.CreateDriver(item);
             return CreatedAtAction(nameof(GetDriver), new { id = item.Id }, item);
         }
     }

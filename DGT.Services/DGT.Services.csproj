@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DGT.Data\DGT.Data.csproj" />
+    <ProjectReference Include="..\DGT.Models\DGT.Models.csproj" />
+  </ItemGroup>
+
 </Project>

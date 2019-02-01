@@ -6,6 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using DGT.Data;
 using System;
+using DGT.Services;
+using DGT.Data.Repositories;
+using DGT.Data.Infrastructure;
 
 namespace DGT.WebApi
 {
@@ -23,7 +26,7 @@ namespace DGT.WebApi
         {
             services.AddDbContext<DgtDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("DgtDbContext"),
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                 sqlServerOptionsAction: sqlOptions =>
                 {
                     sqlOptions.EnableRetryOnFailure(
@@ -31,8 +34,14 @@ namespace DGT.WebApi
                     maxRetryDelay: TimeSpan.FromSeconds(30),
                     errorNumbersToAdd: null);
                 });
-
             });
+
+            // Add application services.
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IDbFactory, DbFactory>();
+            services.AddTransient<IDriverService, DriverService>();
+            services.AddTransient<IDriverRepository>(s => new DriverRepository(s.GetService<IDbFactory>(), Configuration.GetConnectionString("DefaultConnection")));
+
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

@@ -7,7 +7,7 @@ namespace DGT.Models
 {
     public class VehicleDriver
     { 
-        public long Id { get; set; }
+        public string Id { get; set; }
 
         public string VehicleId { get; set; }
         public Vehicle Vehicle { get; set; }
