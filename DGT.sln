@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DGT.WebApi", "DGT.WebApi\DGT.WebApi.csproj", "{B81A0121-EC94-4560-BDCD-FC9C50DAD17D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DGT.WebApi", "DGT.WebApi\DGT.WebApi.csproj", "{B81A0121-EC94-4560-BDCD-FC9C50DAD17D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DGT.Data", "DGT.Data\DGT.Data.csproj", "{8CF10358-5F97-478A-9949-6BEE8FD58917}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DGT.Models", "DGT.Models\DGT.Models.csproj", "{3555AD6B-AFAA-4CC3-836F-166B61187B86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DGT.Services", "DGT.Services\DGT.Services.csproj", "{CD971C6B-6086-4AFE-9F81-62008DEBD923}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{B81A0121-EC94-4560-BDCD-FC9C50DAD17D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B81A0121-EC94-4560-BDCD-FC9C50DAD17D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B81A0121-EC94-4560-BDCD-FC9C50DAD17D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CF10358-5F97-478A-9949-6BEE8FD58917}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CF10358-5F97-478A-9949-6BEE8FD58917}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CF10358-5F97-478A-9949-6BEE8FD58917}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CF10358-5F97-478A-9949-6BEE8FD58917}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3555AD6B-AFAA-4CC3-836F-166B61187B86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3555AD6B-AFAA-4CC3-836F-166B61187B86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3555AD6B-AFAA-4CC3-836F-166B61187B86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3555AD6B-AFAA-4CC3-836F-166B61187B86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD971C6B-6086-4AFE-9F81-62008DEBD923}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD971C6B-6086-4AFE-9F81-62008DEBD923}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD971C6B-6086-4AFE-9F81-62008DEBD923}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD971C6B-6086-4AFE-9F81-62008DEBD923}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
