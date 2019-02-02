@@ -43,9 +43,10 @@ namespace DGT.Data.Infrastructure
                
                     DbContextOptionsBuilder optionsBuilder = new DbContextOptionsBuilder<DgtDbContext>();
                     optionsBuilder.UseSqlServer(conString);
-                
 
-                return dataContext ?? (dataContext = DbFactory.Init(optionsBuilder.Options));
+
+                // optionsBuilder.Options
+                return dataContext ?? (dataContext = DbFactory.Init(null));
             }
         }
         #endregion

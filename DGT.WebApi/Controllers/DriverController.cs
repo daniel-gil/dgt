@@ -23,7 +23,9 @@ namespace DGT.WebApi.Controllers
             this.driverService = driverService;
         }
 
-        // GET: api/drivers
+        /// <summary>
+        /// Get all the drivers.
+        /// </summary>   
         [HttpGet]
         public ActionResult<IEnumerable<Driver>> GetDrivers()
         {
@@ -31,7 +33,12 @@ namespace DGT.WebApi.Controllers
             return list.ToList();
         }
 
-        // GET: api/drivers/5
+
+   
+        /// <summary>
+        /// Get a driver by it's ID (it is, the DNI)
+        /// </summary>
+        /// <param name="id"></param>      
         [HttpGet("{id}")]
         public ActionResult<Driver> GetDriver(string id)
         {

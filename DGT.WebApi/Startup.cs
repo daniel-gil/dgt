@@ -9,6 +9,7 @@ using System;
 using DGT.Services;
 using DGT.Data.Repositories;
 using DGT.Data.Infrastructure;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace DGT.WebApi
 {
@@ -36,6 +37,24 @@ namespace DGT.WebApi
                 });
             });
 
+
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "DGT Project API",
+                    Description = "DGT system for managing drivers, vehicles and infractions.",
+                    TermsOfService = "None",
+                    Contact = new Contact
+                    {
+                        Name = "Support Team",
+                        Email = "support@my-domain.com",
+                    }
+                });
+            });
+
             // Add application services.
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IDbFactory, DbFactory>();
@@ -58,6 +77,17 @@ namespace DGT.WebApi
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "DGT Project API V1");
+            });
+            
 
             app.UseHttpsRedirection();
             app.UseMvc();
