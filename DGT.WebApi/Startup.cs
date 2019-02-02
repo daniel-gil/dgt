@@ -52,7 +52,13 @@ namespace DGT.WebApi
                         break;
                     default:
                         options.UseSqlServer(sqlConnectionString,
-                            b => b.MigrationsAssembly("DGT.WebApi"));
+                           sqlServerOptionsAction: sqlOptions =>
+                           {
+                               sqlOptions.EnableRetryOnFailure(
+                               maxRetryCount: 10,
+                               maxRetryDelay: TimeSpan.FromSeconds(30),
+                               errorNumbersToAdd: null);
+                           });
                         break;
                 }
             });

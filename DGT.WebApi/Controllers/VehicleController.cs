@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using DGT.Models;
 using DGT.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace DGT.WebApi.Controllers
 {
@@ -31,12 +29,12 @@ namespace DGT.WebApi.Controllers
         [HttpGet("{id}")]
         public ActionResult<Vehicle> GetVehicle(string id)
         {
-            var driver = vehicleService.GetVehicle(id);
-            if (driver == null)
+            var vehicle = vehicleService.GetVehicle(id);
+            if (vehicle == null)
             {
                 return NotFound();
             }
-            return driver;
+            return vehicle;
         }
 
         // POST: api/vehicles
