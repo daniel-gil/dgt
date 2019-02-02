@@ -16,6 +16,10 @@ namespace DGT.Models
         public string VehicleId { get; set; }
 
         [JsonIgnore]
+        public Driver Driver { get; set; }
+        public string DriverId { get; set; }
+
+        [JsonIgnore]
         public Infraction Infraction { get; set; }
         public string InfractionId { get; set; }
     }

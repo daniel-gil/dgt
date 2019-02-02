@@ -44,10 +44,16 @@ namespace DGT.WebApi.Controllers
 
         // POST: api/drivers
         [HttpPost]
-        public ActionResult<Driver> CreateDriver(Driver item)
+        public ActionResult<Driver> CreateDriver(Driver driver)
         {
-            driverService.CreateDriver(item);
-            return CreatedAtAction(nameof(GetDriver), new { id = item.Id }, item);
+            var d = driverService.GetDriver(driver.Id);
+            if (d != null)
+            {
+                return UnprocessableEntity("the driver already exists");
+            }
+
+            driverService.CreateDriver(driver);
+            return CreatedAtAction(nameof(GetDriver), new { id = driver.Id }, driver);
         }
     }
 }

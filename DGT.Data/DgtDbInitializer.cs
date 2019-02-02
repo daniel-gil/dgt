@@ -37,15 +37,19 @@ namespace DGT.Data
                 context.Drivers.Add(driver_01);
                 context.Drivers.Add(driver_02);
             }
+            context.SaveChanges();
 
             if (!context.Vehicles.Any())
             {
+                Driver driver = context.Drivers.FirstOrDefault();
+
                 Vehicle vehicle_01 = new Vehicle
                 {
                     Id = "0001",
                     LicensePlate = "0000ABC",
                     Brand = "Seat",
-                    Model = "León"
+                    Model = "León",
+                    MainRegularDriverId = driver.Id,
                 };
 
                 Vehicle vehicle_02 = new Vehicle
@@ -53,7 +57,8 @@ namespace DGT.Data
                     Id = "0002",
                     LicensePlate = "1111XYZ",
                     Brand = "Volkswagen",
-                    Model = "Golf"
+                    Model = "Golf",
+                    MainRegularDriverId = driver.Id,
                 };
 
                 Vehicle vehicle_03 = new Vehicle
@@ -61,7 +66,8 @@ namespace DGT.Data
                     Id = "0003",
                     LicensePlate = "3333XYZ",
                     Brand = "Volkswagen",
-                    Model = "Touran"
+                    Model = "Touran",
+                    MainRegularDriverId = driver.Id,
                 };
 
                 Vehicle vehicle_04 = new Vehicle
@@ -69,7 +75,8 @@ namespace DGT.Data
                     Id = "0004",
                     LicensePlate = "5555XXX",
                     Brand = "Ferrari",
-                    Model = "Testarrosa"
+                    Model = "Testarrosa",
+                    MainRegularDriverId = driver.Id,
                 };
 
                 context.Vehicles.Add(vehicle_01);
@@ -107,42 +114,40 @@ namespace DGT.Data
             }
             context.SaveChanges();
 
+            //if (!context.VehicleInfractions.Any())
+            //{
+            //    if (context.Vehicles.Any() && context.Infractions.Any())
+            //    {
+            //        var driver = context.Drivers.FirstOrDefault();
+            //        var vIndex = 0;
+            //        foreach (Vehicle vehicle in context.Vehicles)
+            //        {
+            //            var iIndex = 0;
+            //            foreach (Infraction infraction in context.Infractions)
+            //            {
+            //                if (vIndex > 0 && iIndex > 0)
+            //                {
+            //                    // only register all the infractions for the first vehicle, for the rest, just register the first infraction
+            //                    break;
+            //                }
+            //                VehicleInfraction vehicle_infraction = new VehicleInfraction
+            //                {
+            //                    Infraction = infraction,
+            //                    InfractionId = infraction.Id,
+            //                    Vehicle = vehicle,
+            //                    VehicleId = vehicle.Id,
+            //                    InfractionDate = DateTime.Now,
+            //                    DriverId = driver.Id,
+            //                };
 
-            if (!context.VehicleInfractions.Any())
-            {
-                if (context.Vehicles.Any() && context.Infractions.Any())
-                {
-                    var vIndex = 0;
-                    foreach (Vehicle vehicle in context.Vehicles)
-                    {
-
-                        var iIndex = 0;
-                        foreach (Infraction infraction in context.Infractions)
-                        {
-                            if (vIndex > 0 && iIndex > 0)
-                            {
-                                // only register all the infractions for the first vehicle, for the rest, just register the first infraction
-                                break;
-                            }
-                            VehicleInfraction vehicle_infraction = new VehicleInfraction
-                            {
-                                Infraction = infraction,
-                                InfractionId = infraction.Id,
-                                Vehicle = vehicle,
-                                VehicleId = vehicle.Id,
-                                InfractionDate = DateTime.Now,
-                            };
-
-                            context.VehicleInfractions.Add(vehicle_infraction);
-                            iIndex++;
-                        }
-                        
-                        vIndex++;
-                    }
-
-                }
-            }
-            context.SaveChanges();
+            //                context.VehicleInfractions.Add(vehicle_infraction);
+            //                iIndex++;
+            //            }
+            //            vIndex++;
+            //        }
+            //    }
+            //}
+            //context.SaveChanges();
         }
     }
 }

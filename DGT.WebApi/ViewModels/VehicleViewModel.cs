@@ -8,6 +8,6 @@ namespace DGT.WebApi.ViewModels
         public string Brand { get; set; }
         public string Model { get; set; }
         public string LicensePlate { get; set; }
-        public string DriverId { get; set; }
+        public List<string> RegularDrivers { get; set; }
     }
 }

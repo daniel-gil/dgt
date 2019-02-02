@@ -76,6 +76,14 @@ namespace DGT.WebApi.Controllers
             {
                 return NotFound("infraction not found");
             }
+
+            // in case that the driver is not specified in the request, we assume that the infraction shall be assigned to the main regular driver from this vehicle
+            var driverId = request.DriverId;
+            if (string.IsNullOrEmpty(driverId))
+            {
+                driverId = vehicle.MainRegularDriverId;
+            }
+
             VehicleInfraction vehicleInfraction = new VehicleInfraction
             {
                 Infraction = infraction,
@@ -83,9 +91,10 @@ namespace DGT.WebApi.Controllers
                 Vehicle = vehicle,
                 VehicleId = vehicle.Id,
                 InfractionDate = request.InfractionDate,
+                DriverId = driverId,
             };
-            vehicleInfractionService.RegisterInfraction(vehicleInfraction);
-            return Ok();
+            var remainingDriverPoints = vehicleInfractionService.RegisterInfraction(vehicleInfraction);
+            return Ok("Remaining driver points: " + remainingDriverPoints);
         }
 
 

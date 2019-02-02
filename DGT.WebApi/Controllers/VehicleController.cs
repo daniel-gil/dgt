@@ -47,7 +47,7 @@ namespace DGT.WebApi.Controllers
 
         // POST: api/vehicles
         [HttpPost]
-        public ActionResult<Models.Vehicle> CreateVehicle(ViewModels.VehicleViewModel vehicleViewModel)
+        public ActionResult<Models.Vehicle> CreateVehicle(VehicleViewModel vehicleViewModel)
         {
             var vehicle = vehicleService.GetVehicle(vehicleViewModel.Id);
             if (vehicle != null)
@@ -56,35 +56,49 @@ namespace DGT.WebApi.Controllers
                 return Conflict("the vehicle already exists");
             }
 
-            var driver = driverService.GetDriver(vehicleViewModel.DriverId);
-            if (driver == null)
+            // first loop through all drivers from the request checking that exists, and storing the first one as the main regular driver
+            string mainRegularDriverId = "";
+            foreach (string regularDriverId in vehicleViewModel.RegularDrivers)
             {
-                return BadRequest("the driver does not exists");
+                var driver = driverService.GetDriver(regularDriverId);
+                if (driver == null)
+                {
+                    return BadRequest("the driver '"+ regularDriverId + "' does not exists");
+                }
+
+                if (mainRegularDriverId == "")
+                {
+                    mainRegularDriverId = regularDriverId;
+                }
             }
 
-            // first create the vehicle
+
+            // second create the vehicle
             vehicle = new Vehicle
             {
-                Brand= vehicleViewModel.Brand,
+                Brand = vehicleViewModel.Brand,
                 Model = vehicleViewModel.Model,
                 Id = vehicleViewModel.Id,
                 LicensePlate = vehicleViewModel.LicensePlate,
+                MainRegularDriverId = mainRegularDriverId,
             };
             vehicleService.CreateVehicle(vehicle);
 
-            // then create the relationship between the driver and the vehicle
-            var error = vehicleDriverService.CreateVehicleDriver(new VehicleDriver
+            // and finally create the relationship between the drivers and the vehicle
+            foreach (string regularDriverId in vehicleViewModel.RegularDrivers)
             {
-                Driver = driver,
-                DriverId = driver.Id,
-                Vehicle = vehicle,
-                VehicleId = vehicle.Id,
-            });
+                var error = vehicleDriverService.CreateVehicleDriver(new VehicleDriver
+                {
+                    DriverId = regularDriverId,
+                    VehicleId = vehicle.Id,
+                });
 
-            if (error != "") {
-                return UnprocessableEntity(error);
+                if (error != "")
+                {
+                    return UnprocessableEntity(error);
+                }
             }
-
+            
             return CreatedAtAction(nameof(GetVehicle), new { id = vehicle.Id }, vehicle);
         }
     }
