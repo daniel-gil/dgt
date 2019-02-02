@@ -19,7 +19,7 @@ namespace DGT.Data.Infrastructure
 
         public void Commit()
         {
-            DbContext.Commit();
+            //DbContext.Commit();
         }
 
         public async Task CompleteAsync()

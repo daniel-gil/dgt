@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DGT.Models
 {
-    public class Driver
+    public class Driver : IEntityBase
     {
         [Display(Name = "DNI")]
         public string Id { get; set; } // DNI

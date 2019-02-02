@@ -6,37 +6,56 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using DGT.Data;
 using System;
-using DGT.Services;
 using DGT.Data.Repositories;
-using DGT.Data.Infrastructure;
 using Swashbuckle.AspNetCore.Swagger;
+using DGT.Data.Abstract;
+using DGT.Services;
 
 namespace DGT.WebApi
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private static string _applicationPath = string.Empty;
+        string sqlConnectionString = string.Empty;
+        bool useInMemoryProvider = false;
+        public IConfiguration Configuration { get; }
+
+        public Startup(IHostingEnvironment env)
         {
-            Configuration = configuration;
+            _applicationPath = env.WebRootPath;
+
+            var builder = new ConfigurationBuilder()
+               .SetBasePath(env.ContentRootPath)
+               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+               .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+               .AddEnvironmentVariables();
+
+            Configuration = builder.Build();
         }
 
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DgtDbContext>(options =>
+            string sqlConnectionString = Configuration.GetConnectionString("DefaultConnection");
+            try
             {
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
-                sqlServerOptionsAction: sqlOptions =>
-                {
-                    sqlOptions.EnableRetryOnFailure(
-                    maxRetryCount: 10,
-                    maxRetryDelay: TimeSpan.FromSeconds(30),
-                    errorNumbersToAdd: null);
-                });
-            });
+                useInMemoryProvider = bool.Parse(Configuration["AppSettings:InMemoryProvider"]);
+            }
+            catch { }
 
+            services.AddDbContext<DgtDbContext>(options => {
+                switch (useInMemoryProvider)
+                {
+                    case true:
+                        options.UseInMemoryDatabase();
+                        break;
+                    default:
+                        options.UseSqlServer(sqlConnectionString,
+                            b => b.MigrationsAssembly("DGT.WebApi"));
+                        break;
+                }
+            });
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
@@ -55,19 +74,31 @@ namespace DGT.WebApi
                 });
             });
 
-            // Add application services.
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<IDbFactory, DbFactory>();
-            services.AddTransient<IDriverService, DriverService>();
-            services.AddTransient<IDriverRepository>(s => new DriverRepository(s.GetService<IDbFactory>(), Configuration.GetConnectionString("DefaultConnection")));
+            // Repositories
+            services.AddScoped<IDriverRepository, DriverRepository>();
 
+            // Services
+            services.AddScoped<IDriverService, DriverService>();
+            services.AddScoped<IServiceProvider, ServiceProvider>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            // Enable Cors
+            services.AddCors();
+
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseStaticFiles();
+            // Add MVC to the request pipeline.
+            app.UseCors(builder =>
+                builder.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod());
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -98,6 +129,7 @@ namespace DGT.WebApi
             {
                 var dbContext = serviceScope.ServiceProvider.GetService<DgtDbContext>();
                 dbContext.Database.EnsureCreated();
+                DgtDbInitializer.Initialize(dbContext);
             }
         }
     }

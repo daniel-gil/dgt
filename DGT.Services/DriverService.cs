@@ -1,7 +1,5 @@
-﻿using DGT.Data.Infrastructure;
-using DGT.Data.Repositories;
+﻿using DGT.Data.Abstract;
 using DGT.Models;
-using System;
 using System.Collections.Generic;
 
 namespace DGT.Services
@@ -17,23 +15,21 @@ namespace DGT.Services
     public class DriverService : IDriverService
     {
         private readonly IDriverRepository driverRepository;
-        private readonly IUnitOfWork unitOfWork;
 
-        public DriverService(IDriverRepository driverRepository,
-                             IUnitOfWork unitOfWork)
+        public DriverService(IDriverRepository driverRepository)
         {
             this.driverRepository = driverRepository;
-            this.unitOfWork = unitOfWork;
         }
 
         public void CreateDriver(Driver driver)
         {
             driverRepository.Add(driver);
+            SaveDriver();
         }
 
         public Driver GetDriver(string id)
         {
-           return driverRepository.GetById(id);
+           return driverRepository.GetSingle(s => s.Id == id);
         }
 
         public IEnumerable<Driver> GetDrivers()
@@ -43,7 +39,7 @@ namespace DGT.Services
 
         public void SaveDriver()
         {
-            unitOfWork.Commit();
+            driverRepository.Commit();
         }
     }
 }
