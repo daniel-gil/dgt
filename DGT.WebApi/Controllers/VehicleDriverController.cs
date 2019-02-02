@@ -30,9 +30,17 @@ namespace DGT.WebApi.Controllers
 
         [HttpGet]
         [Route("api/drivers/{driverId}/vehicles")]
-        public ActionResult<IEnumerable<Vehicle>> GetVehicleInfractions(string driverId)
+        public ActionResult<IEnumerable<Vehicle>> GetVehiclesByDriver(string driverId)
         {
             var list = vehicleDriverService.GetVehiclesByDriver(driverId);
+            return list?.ToList();
+        }
+
+        [HttpGet]
+        [Route("api/vehicles/{vehicleId}/drivers")]
+        public ActionResult<IEnumerable<Driver>> GetDriversByVehicle(string vehicleId)
+        {
+            var list = vehicleDriverService.GetDriversByVehicle(vehicleId);
             return list?.ToList();
         }
     }

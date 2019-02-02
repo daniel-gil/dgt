@@ -6,9 +6,8 @@ namespace DGT.Services
 {
     public interface IVehicleDriverService
     {
-       // IEnumerable<VehicleDriver> GetVehicleDrivers();
-       IEnumerable<Vehicle> GetVehiclesByDriver(string driverId);
-       // VehicleDriver GetVehicleDriver(string vehicleDriverId);
+        IEnumerable<Vehicle> GetVehiclesByDriver(string driverId);
+        IEnumerable<Driver> GetDriversByVehicle(string vehicleId);
         string CreateVehicleDriver(VehicleDriver vehicleDriver);
         void SaveVehicle();
     }
@@ -16,42 +15,19 @@ namespace DGT.Services
     public class VehicleDriverService : IVehicleDriverService
     {
         private readonly IVehicleDriverRepository vehicleDriverRepository;
-        private readonly IVehicleRepository vehicleRepository;
+        private readonly IVehicleService vehicleService;
         private readonly IDriverService driverService;
 
         public VehicleDriverService(
             IVehicleDriverRepository vehicleDriverRepository,
-            IVehicleRepository vehicleRepository,
+            IVehicleService vehicleService,
             IDriverService driverService)
         {
             this.vehicleDriverRepository = vehicleDriverRepository;
-            this.vehicleRepository = vehicleRepository;
+            this.vehicleService = vehicleService;
             this.driverService = driverService;
         }
 
-        /*
-        public IEnumerable<VehicleDriver> GetInfractionsByVehicle(string vehicleId)
-        {
-            return vehicleDriverRepository.FindBy(s => s.VehicleId == vehicleId);
-        }
-
-        public VehicleDriver GetVehicleDriver(string vehicleDriverId)
-        {
-            return vehicleDriverRepository.GetSingle(s => s.Id == vehicleDriverId);
-        }
-
-        public IEnumerable<VehicleDriver> GetVehicleDrivers()
-        {
-            return vehicleDriverRepository.GetAll();
-        }
-
-
-        public void RegisterInfraction(VehicleDriver vehicleDriver)
-        {
-            vehicleDriverRepository.Add(vehicleDriver);
-            SaveVehicle();
-        }
-        */
 
         public IEnumerable<Vehicle> GetVehiclesByDriver(string driverId)
         {
@@ -60,10 +36,23 @@ namespace DGT.Services
 
             foreach (VehicleDriver vehicleDriver in list)
             {
-                var vehicle = vehicleRepository.GetSingle(vehicleDriver.VehicleId);
+                var vehicle = vehicleService.GetVehicle(vehicleDriver.VehicleId);
                 vehicles.Add(vehicle);
             }
             return vehicles;
+        }
+
+        public IEnumerable<Driver> GetDriversByVehicle(string vehicleId)
+        {
+            List<Driver> drivers = new List<Driver>();
+            var list = vehicleDriverRepository.FindBy(s => s.VehicleId == vehicleId);
+
+            foreach (VehicleDriver vehicleDriver in list)
+            {
+                var driver = driverService.GetDriver(vehicleDriver.DriverId);
+                drivers.Add(driver);
+            }
+            return drivers;
         }
 
         public string CreateVehicleDriver(VehicleDriver vehicleDriver)
@@ -91,6 +80,8 @@ namespace DGT.Services
 
             return "";
         }
+
+
 
         public void SaveVehicle()
         {
