@@ -9,4 +9,7 @@ namespace DGT.Data.Abstract
     public interface IInfractionRepository : IEntityBaseRepository<Infraction> { }
 
     public interface IVehicleInfractionRepository : IEntityBaseRepository<VehicleInfraction> { }
+
+    public interface IVehicleDriverRepository : IEntityBaseRepository<VehicleDriver> { }
+    
 }

@@ -42,20 +42,40 @@ namespace DGT.Data
             {
                 Vehicle vehicle_01 = new Vehicle
                 {
-                    Id = "0000ABC",
+                    Id = "0001",
+                    LicensePlate = "0000ABC",
                     Brand = "Seat",
                     Model = "León"
                 };
 
                 Vehicle vehicle_02 = new Vehicle
                 {
-                    Id = "1111XYZ",
+                    Id = "0002",
+                    LicensePlate = "1111XYZ",
                     Brand = "Volkswagen",
                     Model = "Golf"
                 };
 
+                Vehicle vehicle_03 = new Vehicle
+                {
+                    Id = "0003",
+                    LicensePlate = "3333XYZ",
+                    Brand = "Volkswagen",
+                    Model = "Touran"
+                };
+
+                Vehicle vehicle_04 = new Vehicle
+                {
+                    Id = "0004",
+                    LicensePlate = "5555XXX",
+                    Brand = "Ferrari",
+                    Model = "Testarrosa"
+                };
+
                 context.Vehicles.Add(vehicle_01);
                 context.Vehicles.Add(vehicle_02);
+                context.Vehicles.Add(vehicle_03);
+                context.Vehicles.Add(vehicle_04);
             }
 
             if (!context.Infractions.Any())
@@ -74,8 +94,16 @@ namespace DGT.Data
                     PointsToDiscount = 5
                 };
 
+                Infraction infraction_03 = new Infraction
+                {
+                    Id = "RECKLESS",
+                    Description = "Reckless driving.",
+                    PointsToDiscount = 7
+                };
+                
                 context.Infractions.Add(infraction_01);
                 context.Infractions.Add(infraction_02);
+                context.Infractions.Add(infraction_03);
             }
             context.SaveChanges();
 
@@ -84,21 +112,34 @@ namespace DGT.Data
             {
                 if (context.Vehicles.Any() && context.Infractions.Any())
                 {
-                    var vehicle_01 = context.Vehicles.FirstOrDefault();
-
-                    foreach (Infraction infraction in context.Infractions)
+                    var vIndex = 0;
+                    foreach (Vehicle vehicle in context.Vehicles)
                     {
-                        VehicleInfraction vehicle_infraction = new VehicleInfraction
-                        {
-                            Infraction = infraction,
-                            InfractionId = infraction.Id,
-                            Vehicle = vehicle_01,
-                            VehicleId = vehicle_01.Id,
-                            InfractionDate = DateTime.Now,
-                        };
 
-                        context.VehicleInfractions.Add(vehicle_infraction);
+                        var iIndex = 0;
+                        foreach (Infraction infraction in context.Infractions)
+                        {
+                            if (vIndex > 0 && iIndex > 0)
+                            {
+                                // only register all the infractions for the first vehicle, for the rest, just register the first infraction
+                                break;
+                            }
+                            VehicleInfraction vehicle_infraction = new VehicleInfraction
+                            {
+                                Infraction = infraction,
+                                InfractionId = infraction.Id,
+                                Vehicle = vehicle,
+                                VehicleId = vehicle.Id,
+                                InfractionDate = DateTime.Now,
+                            };
+
+                            context.VehicleInfractions.Add(vehicle_infraction);
+                            iIndex++;
+                        }
+                        
+                        vIndex++;
                     }
+
                 }
             }
             context.SaveChanges();

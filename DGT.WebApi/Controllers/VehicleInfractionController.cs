@@ -59,6 +59,7 @@ namespace DGT.WebApi.Controllers
         }
 
 
+
         // POST: api/vehicles/{vehicleId}/infraction/{infractionId}
         [HttpPost]
         [Route("api/vehicles/{vehicleId}/infractions/{infractionId}")]
@@ -86,5 +87,7 @@ namespace DGT.WebApi.Controllers
             vehicleInfractionService.RegisterInfraction(vehicleInfraction);
             return Ok();
         }
+
+
     }
 }

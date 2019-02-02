@@ -12,6 +12,7 @@ namespace DGT.Models
         public string Name { get; set; }
         public string Surname { get; set; }
         public sbyte Points { get; set; }
+        public sbyte NumVehicles { get; set; }
 
         public string FullName()
         {

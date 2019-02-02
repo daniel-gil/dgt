@@ -9,6 +9,7 @@ namespace DGT.Services
         IEnumerable<Driver> GetDrivers();
         Driver GetDriver(string id);
         void CreateDriver(Driver driver);
+        void UpdateDriver(Driver driver);
         void SaveDriver();
     }
 
@@ -24,6 +25,12 @@ namespace DGT.Services
         public void CreateDriver(Driver driver)
         {
             driverRepository.Add(driver);
+            SaveDriver();
+        }
+
+        public void UpdateDriver(Driver driver)
+        {
+            driverRepository.Update(driver);
             SaveDriver();
         }
 

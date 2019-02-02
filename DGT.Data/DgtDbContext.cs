@@ -14,12 +14,15 @@ namespace DGT.Data
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<Infraction> Infractions { get; set; }
         public DbSet<VehicleInfraction> VehicleInfractions { get; set; }
+        public DbSet<VehicleDriver> VehicleDrivers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new DriverConfiguration());
             modelBuilder.ApplyConfiguration(new VehicleConfiguration());
             modelBuilder.ApplyConfiguration(new InfractionConfiguration());
+            modelBuilder.ApplyConfiguration(new VehicleInfractionConfiguration());
+            modelBuilder.ApplyConfiguration(new VehicleDriverConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

@@ -11,6 +11,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using DGT.Data.Abstract;
 using DGT.Services;
 using Newtonsoft.Json.Serialization;
+using DGT.WebApi.ViewModels;
 
 namespace DGT.WebApi
 {
@@ -86,6 +87,7 @@ namespace DGT.WebApi
             services.AddScoped<IVehicleRepository, VehicleRepository>();
             services.AddScoped<IVehicleInfractionRepository, VehicleInfractionRepository>();
             services.AddScoped<IInfractionRepository, InfractionRepository>();
+            services.AddScoped<IVehicleDriverRepository, VehicleDriverRepository>();
 
             // Services
             services.AddScoped<IServiceProvider, ServiceProvider>();
@@ -93,10 +95,11 @@ namespace DGT.WebApi
             services.AddScoped<IVehicleService, VehicleService>();
             services.AddScoped<IVehicleInfractionService, VehicleInfractionService>();
             services.AddScoped<IInfractionService, InfractionService>();
+            services.AddScoped<IVehicleDriverService, VehicleDriverService>();
+            
 
             // Enable Cors
             services.AddCors();
-
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
