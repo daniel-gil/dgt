@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using DGT.Data;
 using DGT.Models;
+using DGT.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,39 +12,38 @@ namespace DGT.WebApi.Controllers
     [ApiController]
     public class VehicleController : ControllerBase
     {
-        private readonly DgtDbContext _context;
+        private readonly IVehicleService vehicleService;
 
-        public VehicleController(DgtDbContext context)
+        public VehicleController(IVehicleService vehicleService)
         {
-            _context = context;
+            this.vehicleService = vehicleService;
         }
 
         // GET: api/vehicles
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Vehicle>>> GetVehicles()
+        public ActionResult<IEnumerable<Vehicle>> GetVehicles()
         {
-            return await _context.Vehicles.ToListAsync();
+            var list = vehicleService.GetVehicles();
+            return list.ToList();
         }
 
         // GET: api/vehicles/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Vehicle>> GetVehicle(string id)
+        public ActionResult<Vehicle> GetVehicle(string id)
         {
-            var vehicle = await _context.Vehicles.FindAsync(id);
-            if (vehicle == null)
+            var driver = vehicleService.GetVehicle(id);
+            if (driver == null)
             {
                 return NotFound();
             }
-            return vehicle;
+            return driver;
         }
 
         // POST: api/vehicles
         [HttpPost]
-        public async Task<ActionResult<Vehicle>> CreateVehicle(Vehicle item)
+        public ActionResult<Vehicle> CreateVehicle(Vehicle item)
         {
-            _context.Vehicles.Add(item);
-            await _context.SaveChangesAsync();
-
+            vehicleService.CreateVehicle(item);
             return CreatedAtAction(nameof(GetVehicle), new { id = item.Id }, item);
         }
     }

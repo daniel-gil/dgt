@@ -76,16 +76,19 @@ namespace DGT.WebApi
 
             // Repositories
             services.AddScoped<IDriverRepository, DriverRepository>();
+            services.AddScoped<IVehicleRepository, VehicleRepository>();
+            services.AddScoped<IInfractionRepository, InfractionRepository>();
 
             // Services
-            services.AddScoped<IDriverService, DriverService>();
             services.AddScoped<IServiceProvider, ServiceProvider>();
+            services.AddScoped<IDriverService, DriverService>();
+            services.AddScoped<IVehicleService, VehicleService>();
+            services.AddScoped<IInfractionService, InfractionService>();
 
             // Enable Cors
             services.AddCors();
 
-            services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

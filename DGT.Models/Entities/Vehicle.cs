@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DGT.Models
 {
-    public class Vehicle
+    public class Vehicle : IEntityBase
     {
         [Display(Name = "Matricula")]
         public string Id { get; set; } // License Plate

@@ -27,8 +27,6 @@ namespace DGT.WebApi.Controllers
             return list.ToList();
         }
 
-
-   
         /// <summary>
         /// Get a driver by it's ID (it is, the DNI)
         /// </summary>

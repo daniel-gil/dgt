@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using DGT.Data;
 using DGT.Models;
+using DGT.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,25 +12,26 @@ namespace DGT.WebApi.Controllers
     [ApiController]
     public class InfractionController : ControllerBase
     {
-        private readonly DgtDbContext _context;
+        private readonly IInfractionService infractionService;
 
-        public InfractionController(DgtDbContext context)
+        public InfractionController(IInfractionService infractionService)
         {
-            _context = context;
+            this.infractionService = infractionService;
         }
 
         // GET: api/infractions
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Infraction>>> GetInfractions()
+        public ActionResult<IEnumerable<Infraction>> GetInfractions()
         {
-            return await _context.Infractions.ToListAsync();
+            var list = infractionService.GetInfractions();
+            return list.ToList();
         }
 
         // GET: api/infractions/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Infraction>> GetInfraction(string id)
+        public ActionResult<Infraction> GetInfraction(string id)
         {
-            var infraction = await _context.Infractions.FindAsync(id);
+            var infraction = infractionService.GetInfraction(id);
             if (infraction == null)
             {
                 return NotFound();
@@ -39,11 +41,9 @@ namespace DGT.WebApi.Controllers
 
         // POST: api/infractions
         [HttpPost]
-        public async Task<ActionResult<Infraction>> CreateInfraction(Infraction item)
+        public ActionResult<Infraction> CreateInfraction(Infraction item)
         {
-            _context.Infractions.Add(item);
-            await _context.SaveChangesAsync();
-
+            infractionService.CreateInfraction(item);
             return CreatedAtAction(nameof(GetInfraction), new { id = item.Id }, item);
         }
     }

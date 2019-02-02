@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DGT.Models
 {
-    public class Infraction
+    public class Infraction : IEntityBase
     {
         public string Id { get; set; }
         public string Description { get; set; }
