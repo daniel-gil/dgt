@@ -24,7 +24,7 @@ namespace DGT.WebApi.Controllers
         public ActionResult<IEnumerable<Infraction>> GetInfractions()
         {
             var list = infractionService.GetInfractions();
-            return list.ToList();
+            return list?.ToList();
         }
 
         // GET: api/infractions/5

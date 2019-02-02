@@ -1,4 +1,5 @@
 ﻿using DGT.Models;
+using System;
 using System.Linq;
 
 namespace DGT.Data
@@ -76,7 +77,30 @@ namespace DGT.Data
                 context.Infractions.Add(infraction_01);
                 context.Infractions.Add(infraction_02);
             }
+            context.SaveChanges();
 
+
+            if (!context.VehicleInfractions.Any())
+            {
+                if (context.Vehicles.Any() && context.Infractions.Any())
+                {
+                    var vehicle_01 = context.Vehicles.FirstOrDefault();
+
+                    foreach (Infraction infraction in context.Infractions)
+                    {
+                        VehicleInfraction vehicle_infraction = new VehicleInfraction
+                        {
+                            Infraction = infraction,
+                            InfractionId = infraction.Id,
+                            Vehicle = vehicle_01,
+                            VehicleId = vehicle_01.Id,
+                            InfractionDate = DateTime.Now,
+                        };
+
+                        context.VehicleInfractions.Add(vehicle_infraction);
+                    }
+                }
+            }
             context.SaveChanges();
         }
     }

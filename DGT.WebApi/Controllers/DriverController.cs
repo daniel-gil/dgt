@@ -24,7 +24,7 @@ namespace DGT.WebApi.Controllers
         public ActionResult<IEnumerable<Driver>> GetDrivers()
         {
             var list = driverService.GetDrivers();
-            return list.ToList();
+            return list?.ToList();
         }
 
         /// <summary>

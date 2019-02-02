@@ -10,6 +10,7 @@ using DGT.Data.Repositories;
 using Swashbuckle.AspNetCore.Swagger;
 using DGT.Data.Abstract;
 using DGT.Services;
+using Newtonsoft.Json.Serialization;
 
 namespace DGT.WebApi
 {
@@ -83,18 +84,30 @@ namespace DGT.WebApi
             // Repositories
             services.AddScoped<IDriverRepository, DriverRepository>();
             services.AddScoped<IVehicleRepository, VehicleRepository>();
+            services.AddScoped<IVehicleInfractionRepository, VehicleInfractionRepository>();
             services.AddScoped<IInfractionRepository, InfractionRepository>();
 
             // Services
             services.AddScoped<IServiceProvider, ServiceProvider>();
             services.AddScoped<IDriverService, DriverService>();
             services.AddScoped<IVehicleService, VehicleService>();
+            services.AddScoped<IVehicleInfractionService, VehicleInfractionService>();
             services.AddScoped<IInfractionService, InfractionService>();
 
             // Enable Cors
             services.AddCors();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(opts =>
+                {
+                    // Force lowercase with underscore (snake case property names) to JSON
+                    opts.SerializerSettings.ContractResolver = new DefaultContractResolver
+                    {
+                        NamingStrategy = new SnakeCaseNamingStrategy()
+                    };
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

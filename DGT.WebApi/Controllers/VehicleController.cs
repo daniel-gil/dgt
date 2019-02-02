@@ -22,7 +22,7 @@ namespace DGT.WebApi.Controllers
         public ActionResult<IEnumerable<Vehicle>> GetVehicles()
         {
             var list = vehicleService.GetVehicles();
-            return list.ToList();
+            return list?.ToList();
         }
 
         // GET: api/vehicles/5

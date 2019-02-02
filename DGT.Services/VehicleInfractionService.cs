@@ -6,48 +6,48 @@ namespace DGT.Services
 {
     public interface IVehicleInfractionService
     {
-        // IEnumerable<VehicleInfraction> GetVehiclesInfractions();
-        // Vehicle GetVehicle(string id);
-        // void CreateVehicle(Vehicle vehicle);
-        void RegisterInfraction(Vehicle vehicle, Infraction infraction);
+        IEnumerable<VehicleInfraction> GetVehicleInfractions();
+        IEnumerable<VehicleInfraction> GetInfractionsByVehicle(string vehicleId);
+        VehicleInfraction GetVehicleInfraction(string vehicleInfractionId);
+        void RegisterInfraction(VehicleInfraction vehicleInfraction);
         void SaveVehicle();
     }
 
     public class VehicleInfractionService : IVehicleInfractionService
     {
-        private readonly IVehicleRepository vehicleRepository;
+        private readonly IVehicleInfractionRepository vehicleInfractionRepository;
 
-        public VehicleInfractionService(IVehicleRepository vehicleRepository)
+        public VehicleInfractionService(
+             IVehicleInfractionRepository vehicleInfractionRepository)
         {
-            this.vehicleRepository = vehicleRepository;
+            this.vehicleInfractionRepository = vehicleInfractionRepository;
         }
 
-        /*
-        public void CreateVehicle(Vehicle vehicle)
+        public IEnumerable<VehicleInfraction> GetInfractionsByVehicle(string vehicleId)
         {
-            vehicleRepository.Add(vehicle);
+            return vehicleInfractionRepository.FindBy(s => s.VehicleId == vehicleId);
+        }
+
+        public VehicleInfraction GetVehicleInfraction(string vehicleInfractionId)
+        {
+            return vehicleInfractionRepository.GetSingle(s => s.Id == vehicleInfractionId);
+        }
+
+        public IEnumerable<VehicleInfraction> GetVehicleInfractions()
+        {
+            return vehicleInfractionRepository.GetAll();
+        }
+
+
+        public void RegisterInfraction(VehicleInfraction vehicleInfraction)
+        {
+            vehicleInfractionRepository.Add(vehicleInfraction);
             SaveVehicle();
-        }
-
-        public Vehicle GetVehicle(string id)
-        {
-           return vehicleRepository.GetSingle(s => s.Id == id);
-        }
-
-        public IEnumerable<Vehicle> GetVehicles()
-        {
-            return vehicleRepository.GetAll();
-        }
-
-    */
-        public void RegisterInfraction(Vehicle vehicle, Infraction infraction)
-        {
-
         }
 
         public void SaveVehicle()
         {
-            vehicleRepository.Commit();
+            vehicleInfractionRepository.Commit();
         }
     }
 }
