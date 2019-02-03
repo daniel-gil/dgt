@@ -160,6 +160,8 @@ RESPONSE:
 
 ### Vehicles
 
+Instead of using the `licence_plate` as the vehicle ID, we use the `id` which is interpreted as the frame number (número de bastidor), because the entity vehicle can have multiple license plates during its useful life.
+
 #### Get all vehicles
 Retrieve all the registered vehicles.
 
