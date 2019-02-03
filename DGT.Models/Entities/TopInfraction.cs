@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DGT.Models
+﻿namespace DGT.Models
 {
     public class TopInfraction
     {

@@ -12,6 +12,7 @@ namespace DGT.Services
         VehicleInfraction GetVehicleInfraction(string vehicleInfractionId);
         int RegisterInfraction(VehicleInfraction vehicleInfraction);
         IEnumerable<TopInfraction> GetTopInfractions(int top);
+        IEnumerable<TopDriver> GetTopDrivers(int top);
         void SaveVehicle();
     }
 
@@ -92,6 +93,20 @@ namespace DGT.Services
         public void SaveVehicle()
         {
             vehicleInfractionRepository.Commit();
+        }
+
+
+        public IEnumerable<TopDriver> GetTopDrivers(int top)
+        {
+            var topDrivers = (from vehicleInfractions in vehicleInfractionRepository.GetAll()
+                                  group vehicleInfractions by vehicleInfractions.DriverId into infractionsGroup
+                                  select new TopDriver
+                                  {
+                                      DriverId = infractionsGroup.Key,
+                                      Amount = infractionsGroup.Count(),
+                                  }).Take(top).ToList();
+
+            return topDrivers;
         }
     }
 }

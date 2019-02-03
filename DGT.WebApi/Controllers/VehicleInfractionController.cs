@@ -100,7 +100,7 @@ namespace DGT.WebApi.Controllers
         // GET: api/infractions/top/5
         [HttpGet]
         [Route("api/infractions/top/{top}")]
-        public ActionResult<IEnumerable<TopInfraction>> GetTop(int top)
+        public ActionResult<IEnumerable<TopInfraction>> GetTopInfractions(int top)
         {
             var list = vehicleInfractionService.GetTopInfractions(top);
             return list?.ToList();
@@ -109,11 +109,20 @@ namespace DGT.WebApi.Controllers
         // GET: api/infractions/top
         [HttpGet]
         [Route("api/infractions/top")]
-        public ActionResult<IEnumerable<TopInfraction>> GetTopFive()
+        public ActionResult<IEnumerable<TopInfraction>> GetTopFiveInfractions()
         {
             var list = vehicleInfractionService.GetTopInfractions(5);
             return list?.ToList();
         }
 
+
+        // GET: api/drivers/top/5/infractions
+        [HttpGet]
+        [Route("api/drivers/top/{top}/infractions")]
+        public ActionResult<IEnumerable<TopDriver>> GetTopDrivers(int top)
+        {
+            var list = vehicleInfractionService.GetTopDrivers(top);
+            return list?.ToList();
+        }
     }
 }
