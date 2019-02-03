@@ -112,7 +112,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "    {\n        \"id\": \"4567KKD\",\n        \"name\": \"Juan\",\n        \"surname\": \"García\",\n        \"points\": 15\n    }"
+							"raw": "    {\n        \"id\": \"4444KJU\",\n        \"name\": \"Adam\",\n        \"surname\": \"Devine\",\n        \"points\": 15\n    }"
 						},
 						"url": {
 							"raw": "{{dgt_endpoint}}/api/drivers",
@@ -223,6 +223,38 @@
 					"response": []
 				},
 				{
+					"name": "Register new driver to a vehicle",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{dgt_endpoint}}/api/vehicles/{{vehicle_id}}/drivers/{{driver_id}}",
+							"host": [
+								"{{dgt_endpoint}}"
+							],
+							"path": [
+								"api",
+								"vehicles",
+								"{{vehicle_id}}",
+								"drivers",
+								"{{driver_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Add Vehicle",
 					"request": {
 						"method": "POST",
@@ -236,7 +268,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "    {\n        \"id\": \"0006665\",\n        \"license_plate\": \"5454535\",\n        \"brand\": \"Ferrari\",\n        \"model\": \"Testarosa\",\n        \"regular_drivers\" : [\"123456789Z\", \"987654321X\"]\n    }"
+							"raw": "    {\n        \"id\": \"00000123\",\n        \"license_plate\": \"C00L\",\n        \"brand\": \"Ferrari\",\n        \"model\": \"Testarosa\",\n        \"regular_drivers\" : [\"123456789Z\", \"987654321X\"]\n    }"
 						},
 						"url": {
 							"raw": "{{dgt_endpoint}}/api/vehicles",
