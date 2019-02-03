@@ -26,8 +26,6 @@ It also has the flag `InMemoryProvider` to enable an in-memory database, useful 
 ### Seed data
 The project DGT.Data includes a file called `DgtDbInitializer.cs` which initialize the databse in case it's empty. If you want to disable this seeding, just comment the line `SeedDatabase();` from the same file.
 
-DGT system to control drivers, vehicles and infractions in .Net Core.
-
 ## Documentation
 When launching the solution, it can be read the online documentation under the route `/swagger`. It is using the swagger open-source documentation framework.
 
@@ -37,6 +35,33 @@ It can be found in this repository a Postman file with all the available operati
 ## Operations
 
 ### Drivers
+Some clarifications about the `Driver` model:
+
+* The ID of the driver represents the fiscal document number (it is, the DNI).
+* The property `NumVehicles` is the number of vehicles associated with this driver. We keep this information as a property to avoid using a query each time we want to consult this value.
+
+#### Get all drivers
+##### Example:
+REQUEST:
+``` GET {HOST}/api/drivers ```
+
+RESPONSE:
+```[
+    {
+        "id": "123456789Z",
+        "name": "John",
+        "surname": "Smith",
+        "points": 15,
+        "num_vehicles": 0
+    },
+    {
+        "id": "987654321X",
+        "name": "Alice",
+        "surname": "Conor",
+        "points": 8,
+        "num_vehicles": 0
+    }
+]```
 
 #### Add new driver
 
