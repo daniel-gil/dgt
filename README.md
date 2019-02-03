@@ -448,6 +448,65 @@ RESPONSE:
 ]
 ```
 
+#### Get vehicle infraction by ID
+Retrieve the vehicle infraction by its ID.
+
+REQUEST:
+```
+GET {host}/api/vehicles/infractions/349f1dc3-f57d-4cc3-8bca-e712c0cd813e
+```
+
+RESPONSE:
+```
+{
+    "id": "349f1dc3-f57d-4cc3-8bca-e712c0cd813e",
+    "infraction_date": "2019-02-03T15:18:30.2507586",
+    "vehicle_id": "0004",
+    "driver_id": "123456789Z",
+    "infraction_id": "DUI"
+}
+```
+
+
+
+#### Get top drivers (infractions)
+Retrieve the N drivers with the most infractions. 
+
+REQUEST:
+```
+GET {host}/api/drivers/top/1/infractions
+```
+
+RESPONSE:
+```
+[
+    {
+        "driver_id": "123456789Z",
+        "amount": 7
+    },
+    {
+        "driver_id": "987654321X",
+        "amount": 2
+    }
+]
+```
+
+
+
+
+#### xxx
+xxx
+
+
+REQUEST:
+```
+GET {host}/api/xxxx
+```
+
+RESPONSE:
+```
+xxxx
+```
 
 
 
