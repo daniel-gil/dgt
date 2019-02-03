@@ -248,6 +248,21 @@ If any regular driver ID from the request does not exists, we receive the HTTP e
 
 If the driver has reached the maximal number of allowed vehicles, we will receive the HTTP error code `422 Unprocessable Entity` and the error message `this driver has reached the maximal number of vehicles (10)`.
 
+#### Register new driver to a vehicle
+Once the vehicle is created, in order to associate more drivers to the vehicle, we will use the following call:
+
+REQUEST:
+```
+POST {host}/api/vehicles/0001/drivers/123456789Z 
+```
+
+RESPONSE
+```
+HTTP Code 200 OK
+```
+
+If the driver is already linked to the vehicle, we will receive the HTTP error code `400 Bad Request` and the following error message `the driver is already associated to this vehicle`.
+
 #### Get vehicle's drivers
 Retrieve the regular drivers associated to a vehicle
 
