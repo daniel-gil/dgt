@@ -83,6 +83,12 @@ namespace DGT.Data
                 context.Vehicles.Add(vehicle_02);
                 context.Vehicles.Add(vehicle_03);
                 context.Vehicles.Add(vehicle_04);
+
+                driver.NumVehicles += 4;
+                context.VehicleDrivers.Add(new VehicleDriver { DriverId = driver.Id, VehicleId = vehicle_01.Id,});
+                context.VehicleDrivers.Add(new VehicleDriver { DriverId = driver.Id, VehicleId = vehicle_02.Id, });
+                context.VehicleDrivers.Add(new VehicleDriver { DriverId = driver.Id, VehicleId = vehicle_03.Id, });
+                context.VehicleDrivers.Add(new VehicleDriver { DriverId = driver.Id, VehicleId = vehicle_04.Id, });
             }
 
             if (!context.Infractions.Any())
@@ -107,10 +113,26 @@ namespace DGT.Data
                     Description = "Reckless driving.",
                     PointsToDiscount = 7
                 };
-                
+
+                Infraction infraction_04 = new Infraction
+                {
+                    Id = "DWI",
+                    Description = "Driving while intoxicated.",
+                    PointsToDiscount = 2
+                };
+
+                Infraction infraction_05 = new Infraction
+                {
+                    Id = "DUI",
+                    Description = "Driving under the influence.",
+                    PointsToDiscount = 1
+                };
+
                 context.Infractions.Add(infraction_01);
                 context.Infractions.Add(infraction_02);
                 context.Infractions.Add(infraction_03);
+                context.Infractions.Add(infraction_04);
+                context.Infractions.Add(infraction_05);
             }
             context.SaveChanges();
 
