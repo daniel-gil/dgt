@@ -143,6 +143,52 @@ RESPONSE:
 
 ### Vehicles
 
+#### Get all vehicles
+Retrieve all the registered vehicles.
+
+REQUEST:
+```
+GET {host}/api/vehicles
+```
+
+RESPONSE:
+```
+[
+    {
+        "id": "0001",
+        "license_plate": "0000ABC",
+        "brand": "Seat",
+        "model": "León",
+        "main_regular_driver_id": "123456789Z"
+    },
+    {
+        "id": "0002",
+        "license_plate": "1111XYZ",
+        "brand": "Volkswagen",
+        "model": "Golf",
+        "main_regular_driver_id": "123456789Z"
+    }
+]
+```
+
+
+#### Get a vehicle by ID
+Retrieve a a vehicle by its ID, it is, the license plate (matrícula).
+
+REQUEST:
+```
+GET {host}/api/vehicles/1111XYZ
+```
+
+RESPONSE
+```
+{
+    "id": "1111XYZ",
+    "brand": "Volkswagen",
+    "model": "Golf"
+}
+```
+
 ### Infraction types
 
 ### Vehicle infraction
