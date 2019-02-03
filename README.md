@@ -112,6 +112,35 @@ RESPONSE:
 }
 ```
 
+#### Get driver's vehicles
+Retrieve the vehicles associated to a driver.
+
+REQUEST:
+```
+GET {host}/api/drivers/123456789Z/vehicles
+```
+
+RESPONSE:
+```
+[
+    {
+        "id": "0001",
+        "license_plate": "0000ABC",
+        "brand": "Seat",
+        "model": "León",
+        "main_regular_driver_id": "123456789Z"
+    },
+    {
+        "id": "0002",
+        "license_plate": "1111XYZ",
+        "brand": "Volkswagen",
+        "model": "Golf",
+        "main_regular_driver_id": "123456789Z"
+    }
+]
+```
+
+
 ### Vehicles
 
 ### Infraction types
