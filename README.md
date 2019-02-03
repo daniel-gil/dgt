@@ -326,7 +326,9 @@ RESPONSE:
 
 
 #### Get top infraction types
-Creates a new infraction type
+Retrieve the top infraction types (the most common).
+
+By default, it returns the top 5 items:  
 
 REQUEST:
 ```
@@ -337,12 +339,12 @@ RESPONSE:
 ```
 [
     {
-        "infraction_type": "RECKLESS",
+        "infraction_type": "DUI",
         "amount": 4
     },
     {
-        "infraction_type": "RED_LIGHT",
-        "amount": 2
+        "infraction_type": "DWI",
+        "amount": 1
     },
     {
         "infraction_type": "SPEEDING",
@@ -350,16 +352,35 @@ RESPONSE:
     },
     {
         "infraction_type": "RED_LIGHT",
-        "amount": 2
+        "amount": 1
     },
     {
-        "infraction_type": "SPEEDING",
+        "infraction_type": "RECKLESS",
         "amount": 1
     }
-    
 ]
 ```
 
+If we want another top number different than 5, we just have to append the desired value at the end of the route like this: 
+
+REQUEST:
+```
+GET {host}/api/infractions/top/2
+```
+
+RESPONSE:
+```
+[
+    {
+        "infraction_type": "DUI",
+        "amount": 4
+    },
+    {
+        "infraction_type": "DWI",
+        "amount": 1
+    }
+]
+```
 
 ### Infraction types
 
