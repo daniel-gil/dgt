@@ -28,10 +28,12 @@ It also has the flag `InMemoryProvider` to enable an in-memory database, useful 
 The project DGT.Data includes a file called `DgtDbInitializer.cs` which initialize the databse in case it's empty. If you want to disable this seeding, just comment the line `SeedDatabase();` from the same file.
 
 ## Documentation
-When launching the solution, it can be read the online documentation under the route `/swagger`. It is using the swagger open-source documentation framework.
+Besides this readme file, when launching the solution, it can be read the online documentation under the route `/swagger`. It is using the swagger open-source documentation framework.
 
 ## Postman
 It can be found in this repository a Postman file with all the available operations. You can import this file in your Postman application, launch the .Net Core solution and start testing it.
+
+**Note**: the enpoint in the postman tests are defined like this: `{{dgt_endpoint}}/api/`, it has to be declared the variable `dgt_endpoint` in the Postman Environment to something like that (if launched locally): `https://localhost:44372`.  
 
 ## Operations
 
@@ -321,6 +323,43 @@ RESPONSE:
     "points_to_discount": 3
 }
 ```
+
+
+#### Get top infraction types
+Creates a new infraction type
+
+REQUEST:
+```
+GET {host}/api/infractions/top
+```
+
+RESPONSE:
+```
+[
+    {
+        "infraction_type": "RECKLESS",
+        "amount": 4
+    },
+    {
+        "infraction_type": "RED_LIGHT",
+        "amount": 2
+    },
+    {
+        "infraction_type": "SPEEDING",
+        "amount": 1
+    },
+    {
+        "infraction_type": "RED_LIGHT",
+        "amount": 2
+    },
+    {
+        "infraction_type": "SPEEDING",
+        "amount": 1
+    }
+    
+]
+```
+
 
 ### Infraction types
 
