@@ -41,5 +41,21 @@ namespace DGT.WebApi.Controllers
             var list = vehicleDriverService.GetDriversByVehicle(vehicleId);
             return list?.ToList();
         }
+
+        /// <summary>
+        ///  Register new driver to a vehicle
+        /// </summary>
+        [HttpPost]
+        [Route("api/vehicles/{vehicleId}/drivers/{driverId}")]
+        public ActionResult RegisterNewDriverToVehicle(string vehicleId, string driverId)
+        {
+            var error = vehicleDriverService.RegisterNewDriverToVehicle(vehicleId, driverId);
+            if (!string.IsNullOrEmpty(error))
+            {
+                return BadRequest(error);
+            }
+            return Ok();
+        }
+       
     }
 }
