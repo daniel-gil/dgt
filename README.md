@@ -225,6 +225,9 @@ RESPONSE
 }
 ```
 
+If the vehicle already exists, we receive the HTTP error code `409 Conflict` and the error message `the vehicle already exists`.
+
+If any regular driver ID from the request does not exists, we receive the HTTP error code `400 Bad Request` and the error message `the driver 'NON-EXISTENT_ID' does not exists`.
 
 #### Get vehicle's drivers
 Retrieve the regular drivers associated to a vehicle
