@@ -12,7 +12,7 @@ __________                  _________________           ___________             
 ```
 
 ## .Net Core Solution
-This solution uses Entity Framework Core with the migrations enabled.
+This project has been developed using Visual Studio 2017, ASP.NET Core 2.2 and EntityFrameworkCore 2.2, with the migrations enabled.
 
 ### Structure
 The solution follows the clean architecture and is structured in the following projects: Models, Data, Services and WebApi.
