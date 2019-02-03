@@ -29,6 +29,10 @@ It's a class library that exposes the available operations to the clients (MVC o
 #### DGT.WebApi
 It's a Web API application and represents the presentation layer.
 
+#### DGT.UnitTests
+It's a test project using XUnit test framework to demonstrate how we can use the in-memory database provider to mock the database content.
+
+
 ### appsettings.json
 This file contains the database connection `DefaultConnection` which by default connects to the local DB server.
 
@@ -44,6 +48,7 @@ Besides this readme file, when launching the solution, it can be read the online
 It can be found in this repository the Postman file  [DGT.postman_collection.json](https://github.com/daniel-gil/dgt/blob/master/DGT.postman_collection.json) with all the available operations. You can import this file in your Postman application, launch the .Net Core solution and start testing it.
 
 **Note**: the enpoint in the postman tests are defined like this: `{{dgt_endpoint}}/api/`, it has to be declared the variable `dgt_endpoint` in the Postman Environment to something like that (if launched locally): `https://localhost:44372`.  
+
 
 ## Operations
 
