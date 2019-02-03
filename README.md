@@ -44,7 +44,9 @@ Some clarifications about the `Driver` model:
 Returns all the registered drivers.
 
 REQUEST:
-``` GET {host}/api/drivers ```
+``` 
+GET {host}/api/drivers 
+```
 
 RESPONSE:
 ```[
@@ -71,7 +73,7 @@ Retrieve a driver entity by its ID (it is, the DNI)
 REQUEST:
 ```
     GET {host}/api/drivers/123456789Z
-````
+```
 
 RESPONSE:
 ```
@@ -82,9 +84,33 @@ RESPONSE:
     "points": 15,
     "num_vehicles": 4
 }
-````
+```
 
 #### Add new driver
+Creates a new driver.
+
+REQUEST:
+```
+POST {host}/api/drivers 
+Body:
+    {
+        "id": "4567KKD",
+        "name": "Daniel",
+        "surname": "García",
+        "points": 15
+    }
+```
+
+RESPONSE:
+```
+{
+    "id": "4567KKD",
+    "name": "Daniel",
+    "surname": "García",
+    "points": 15,
+    "num_vehicles": 0
+}
+```
 
 ### Vehicles
 
