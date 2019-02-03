@@ -41,9 +41,10 @@ Some clarifications about the `Driver` model:
 * The property `NumVehicles` is the number of vehicles associated with this driver. We keep this information as a property to avoid using a query each time we want to consult this value.
 
 #### Get all drivers
-##### Example:
+Returns all the registered drivers.
+
 REQUEST:
-``` GET {HOST}/api/drivers ```
+``` GET {host}/api/drivers ```
 
 RESPONSE:
 ```[
@@ -61,7 +62,27 @@ RESPONSE:
         "points": 8,
         "num_vehicles": 0
     }
-]```
+] 
+```
+
+#### Get driver by ID
+Retrieve a driver entity by its ID (it is, the DNI)
+
+REQUEST:
+```
+    GET {host}/api/drivers/123456789Z
+````
+
+RESPONSE:
+```
+{
+    "id": "123456789Z",
+    "name": "John",
+    "surname": "Smith",
+    "points": 15,
+    "num_vehicles": 4
+}
+````
 
 #### Add new driver
 
