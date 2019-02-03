@@ -299,6 +299,28 @@ RESPONSE:
 ```
 
 
+#### Add new infraction types
+Creates a new infraction type
+
+REQUEST:
+```
+POST {host}/api/infractions
+Body:
+    {
+        "id": "SPEEDING",
+        "description": "The driver was driving faster than the maximum speed allowed.",
+        "points_to_discount":  5
+    }
+```
+
+RESPONSE:
+```
+{
+    "id": "SPEEDING",
+    "description": "The driver was driving faster than the maximum speed allowed.",
+    "points_to_discount": 3
+}
+```
 
 ### Infraction types
 
