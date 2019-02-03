@@ -19,7 +19,9 @@ namespace DGT.WebApi.Controllers
             this.infractionService = infractionService;
         }
 
-        // GET: api/infractions
+        /// <summary>
+        ///  Get all the Infraction types
+        /// </summary>
         [HttpGet]
         public ActionResult<IEnumerable<Infraction>> GetInfractions()
         {
@@ -27,7 +29,9 @@ namespace DGT.WebApi.Controllers
             return list?.ToList();
         }
 
-        // GET: api/infractions/5
+        /// <summary>
+        ///  Get an Infraction type by its ID
+        /// </summary>
         [HttpGet("{id}")]
         public ActionResult<Infraction> GetInfraction(string id)
         {
@@ -39,8 +43,9 @@ namespace DGT.WebApi.Controllers
             return infraction;
         }
 
-
-        // POST: api/infractions
+        /// <summary>
+        ///  Create a new Infraction type
+        /// </summary>
         [HttpPost]
         public ActionResult<Infraction> CreateInfraction(Infraction item)
         {

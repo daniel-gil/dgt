@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using DGT.Models;
 using DGT.Services;
@@ -18,8 +19,8 @@ namespace DGT.WebApi.Controllers
         }
 
         /// <summary>
-        /// Get all the drivers.
-        /// </summary>   
+        ///  Get all the drivers.
+        /// </summary>
         [HttpGet]
         public ActionResult<IEnumerable<Driver>> GetDrivers()
         {
@@ -28,9 +29,8 @@ namespace DGT.WebApi.Controllers
         }
 
         /// <summary>
-        /// Get a driver by it's ID (it is, the DNI)
+        ///  Get a driver by it's ID (it is, the DNI)
         /// </summary>
-        /// <param name="id"></param>      
         [HttpGet("{id}")]
         public ActionResult<Driver> GetDriver(string id)
         {
@@ -42,7 +42,9 @@ namespace DGT.WebApi.Controllers
             return driver;
         }
 
-        // POST: api/drivers
+        /// <summary>
+        ///  Create a new Driver
+        /// </summary>
         [HttpPost]
         public ActionResult<Driver> CreateDriver(Driver driver)
         {

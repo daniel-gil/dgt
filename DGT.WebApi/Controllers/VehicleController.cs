@@ -25,7 +25,9 @@ namespace DGT.WebApi.Controllers
             this.vehicleDriverService = vehicleDriverService;
         }
 
-        // GET: api/vehicles
+        /// <summary>
+        ///  Get all Vehicles
+        /// </summary>
         [HttpGet]
         public ActionResult<IEnumerable<Models.Vehicle>> GetVehicles()
         {
@@ -33,7 +35,9 @@ namespace DGT.WebApi.Controllers
             return list?.ToList();
         }
 
-        // GET: api/vehicles/5
+        /// <summary>
+        ///  Get a Vehicles by its ID
+        /// </summary>
         [HttpGet("{id}")]
         public ActionResult<Models.Vehicle> GetVehicle(string id)
         {
@@ -45,7 +49,9 @@ namespace DGT.WebApi.Controllers
             return vehicle;
         }
 
-        // POST: api/vehicles
+        /// <summary>
+        ///  Create a new Vehicles
+        /// </summary>
         [HttpPost]
         public ActionResult<Models.Vehicle> CreateVehicle(VehicleViewModel vehicleViewModel)
         {
@@ -72,7 +78,6 @@ namespace DGT.WebApi.Controllers
                 }
             }
 
-
             // second create the vehicle
             vehicle = new Vehicle
             {
@@ -84,7 +89,7 @@ namespace DGT.WebApi.Controllers
             };
             vehicleService.CreateVehicle(vehicle);
 
-            // and finally create the relationship between the drivers and the vehicle
+            // finally create the relationship between the drivers and the vehicle
             foreach (string regularDriverId in vehicleViewModel.RegularDrivers)
             {
                 var error = vehicleDriverService.CreateVehicleDriver(new VehicleDriver
@@ -98,7 +103,6 @@ namespace DGT.WebApi.Controllers
                     return UnprocessableEntity(error);
                 }
             }
-            
             return CreatedAtAction(nameof(GetVehicle), new { id = vehicle.Id }, vehicle);
         }
     }

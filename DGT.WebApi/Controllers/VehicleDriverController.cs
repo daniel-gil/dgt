@@ -9,25 +9,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DGT.WebApi.Controllers
 {
-//    [Route("api/vehicles")]
     [ApiController]
     public class VehicleDriverController : ControllerBase
     {
-       // private readonly IVehicleService vehicleService;
-       // private readonly IInfractionService infractionService;
         private readonly IVehicleDriverService vehicleDriverService;
 
         public VehicleDriverController(
-            // IVehicleService vehicleService,
-            //IInfractionService infractionService,
             IVehicleDriverService vehicleDriverService)
         {
-           // this.vehicleService = vehicleService;
-            //this.infractionService = infractionService;
             this.vehicleDriverService = vehicleDriverService;
         }
 
-
+        /// <summary>
+        ///  Get all the vehicles of a driver
+        /// </summary>
         [HttpGet]
         [Route("api/drivers/{driverId}/vehicles")]
         public ActionResult<IEnumerable<Vehicle>> GetVehiclesByDriver(string driverId)
@@ -36,6 +31,9 @@ namespace DGT.WebApi.Controllers
             return list?.ToList();
         }
 
+        /// <summary>
+        ///  Get all the drivers associated to a vehicle
+        /// </summary>
         [HttpGet]
         [Route("api/vehicles/{vehicleId}/drivers")]
         public ActionResult<IEnumerable<Driver>> GetDriversByVehicle(string vehicleId)

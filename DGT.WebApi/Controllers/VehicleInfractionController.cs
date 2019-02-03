@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DGT.WebApi.Controllers
 {
-//    [Route("api/vehicles")]
     [ApiController]
     public class VehicleInfractionController : ControllerBase
     {
@@ -28,6 +27,9 @@ namespace DGT.WebApi.Controllers
         }
 
 
+        /// <summary>
+        ///  Get all the infractions of a vehicle
+        /// </summary>
         [HttpGet]
         [Route("api/vehicles/{vehicleId}/infractions")]
         public ActionResult<IEnumerable<VehicleInfraction>> GetVehicleInfractions(string vehicleId)
@@ -36,8 +38,10 @@ namespace DGT.WebApi.Controllers
             return list?.ToList();
         }
 
-
-        [HttpGet("{id}")]
+        /// <summary>
+        ///  Get all the infractions
+        /// </summary>
+        [HttpGet]
         [Route("api/vehicles/infractions")]
         public ActionResult<IEnumerable<VehicleInfraction>> GetInfractions()
         {
@@ -45,8 +49,10 @@ namespace DGT.WebApi.Controllers
             return vehicleInfractions?.ToList();
         }
 
-
-        [HttpGet("{id}")]
+        /// <summary>
+        ///  Get an infractions by its ID
+        /// </summary>
+        [HttpGet]
         [Route("api/vehicles/infractions/{vehicleInfractionId}")]
         public ActionResult<VehicleInfraction> GetVehicleInfraction(string vehicleInfractionId)
         {
@@ -58,9 +64,9 @@ namespace DGT.WebApi.Controllers
             return vehicleInfraction;
         }
 
-
-
-        // POST: api/vehicles/{vehicleId}/infraction/{infractionId}
+        /// <summary>
+        ///  Register a new infraction of a vehicle
+        /// </summary>
         [HttpPost]
         [Route("api/vehicles/{vehicleId}/infractions/{infractionId}")]
         public ActionResult<Vehicle> RegisterVehicleInfraction(string vehicleId, string infractionId, InfractionViewModel request)
@@ -97,7 +103,9 @@ namespace DGT.WebApi.Controllers
             return Ok("Remaining driver points: " + remainingDriverPoints);
         }
 
-        // GET: api/infractions/top/5
+        /// <summary>
+        ///  Get the top Infraction types
+        /// </summary>
         [HttpGet]
         [Route("api/infractions/top/{top}")]
         public ActionResult<IEnumerable<TopInfraction>> GetTopInfractions(int top)
@@ -106,7 +114,9 @@ namespace DGT.WebApi.Controllers
             return list?.ToList();
         }
 
-        // GET: api/infractions/top
+        /// <summary>
+        ///  Get the top 5 Infraction types
+        /// </summary>
         [HttpGet]
         [Route("api/infractions/top")]
         public ActionResult<IEnumerable<TopInfraction>> GetTopFiveInfractions()
@@ -116,7 +126,9 @@ namespace DGT.WebApi.Controllers
         }
 
 
-        // GET: api/drivers/top/5/infractions
+        /// <summary>
+        ///  Get the top Drivers with more infractions
+        /// </summary>
         [HttpGet]
         [Route("api/drivers/top/{top}/infractions")]
         public ActionResult<IEnumerable<TopDriver>> GetTopDrivers(int top)

@@ -11,7 +11,6 @@ using Swashbuckle.AspNetCore.Swagger;
 using DGT.Data.Abstract;
 using DGT.Services;
 using Newtonsoft.Json.Serialization;
-using DGT.WebApi.ViewModels;
 
 namespace DGT.WebApi
 {
@@ -65,23 +64,6 @@ namespace DGT.WebApi
                 }
             });
 
-            // Register the Swagger generator, defining 1 or more Swagger documents
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info
-                {
-                    Version = "v1",
-                    Title = "DGT Project API",
-                    Description = "DGT system for managing drivers, vehicles and infractions.",
-                    TermsOfService = "None",
-                    Contact = new Contact
-                    {
-                        Name = "Support Team",
-                        Email = "support@my-domain.com",
-                    }
-                });
-            });
-
             // Repositories
             services.AddScoped<IDriverRepository, DriverRepository>();
             services.AddScoped<IVehicleRepository, VehicleRepository>();
@@ -111,6 +93,24 @@ namespace DGT.WebApi
                         NamingStrategy = new SnakeCaseNamingStrategy()
                     };
                 });
+
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "DGT Project API",
+                    Description = "DGT system for managing drivers, vehicles and infractions.",
+                    TermsOfService = "None",
+                    Contact = new Contact
+                    {
+                        Name = "Support Team",
+                        Email = "support@my-domain.com",
+                    }
+                });
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
