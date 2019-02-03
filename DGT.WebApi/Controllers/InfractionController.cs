@@ -39,6 +39,7 @@ namespace DGT.WebApi.Controllers
             return infraction;
         }
 
+
         // POST: api/infractions
         [HttpPost]
         public ActionResult<Infraction> CreateInfraction(Infraction item)

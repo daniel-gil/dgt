@@ -114,40 +114,40 @@ namespace DGT.Data
             }
             context.SaveChanges();
 
-            //if (!context.VehicleInfractions.Any())
-            //{
-            //    if (context.Vehicles.Any() && context.Infractions.Any())
-            //    {
-            //        var driver = context.Drivers.FirstOrDefault();
-            //        var vIndex = 0;
-            //        foreach (Vehicle vehicle in context.Vehicles)
-            //        {
-            //            var iIndex = 0;
-            //            foreach (Infraction infraction in context.Infractions)
-            //            {
-            //                if (vIndex > 0 && iIndex > 0)
-            //                {
-            //                    // only register all the infractions for the first vehicle, for the rest, just register the first infraction
-            //                    break;
-            //                }
-            //                VehicleInfraction vehicle_infraction = new VehicleInfraction
-            //                {
-            //                    Infraction = infraction,
-            //                    InfractionId = infraction.Id,
-            //                    Vehicle = vehicle,
-            //                    VehicleId = vehicle.Id,
-            //                    InfractionDate = DateTime.Now,
-            //                    DriverId = driver.Id,
-            //                };
+            if (!context.VehicleInfractions.Any())
+            {
+                if (context.Vehicles.Any() && context.Infractions.Any())
+                {
+                    var driver = context.Drivers.FirstOrDefault();
+                    var vIndex = 0;
+                    foreach (Vehicle vehicle in context.Vehicles)
+                    {
+                        var iIndex = 0;
+                        foreach (Infraction infraction in context.Infractions)
+                        {
+                            if (vIndex > 0 && iIndex > 0)
+                            {
+                                // only register all the infractions for the first vehicle, for the rest, just register the first infraction
+                                break;
+                            }
+                            VehicleInfraction vehicle_infraction = new VehicleInfraction
+                            {
+                                Infraction = infraction,
+                                InfractionId = infraction.Id,
+                                Vehicle = vehicle,
+                                VehicleId = vehicle.Id,
+                                InfractionDate = DateTime.Now,
+                                DriverId = driver.Id,
+                            };
 
-            //                context.VehicleInfractions.Add(vehicle_infraction);
-            //                iIndex++;
-            //            }
-            //            vIndex++;
-            //        }
-            //    }
-            //}
-            //context.SaveChanges();
+                            context.VehicleInfractions.Add(vehicle_infraction);
+                            iIndex++;
+                        }
+                        vIndex++;
+                    }
+                }
+            }
+            context.SaveChanges();
         }
     }
 }

@@ -63,7 +63,7 @@ namespace DGT.WebApi.Controllers
         // POST: api/vehicles/{vehicleId}/infraction/{infractionId}
         [HttpPost]
         [Route("api/vehicles/{vehicleId}/infractions/{infractionId}")]
-        public ActionResult<Vehicle> RegisterVehicleInfraction(string vehicleId, string infractionId, RegisterInfractionRequest request)
+        public ActionResult<Vehicle> RegisterVehicleInfraction(string vehicleId, string infractionId, InfractionViewModel request)
         {
             var vehicle = vehicleService.GetVehicle(vehicleId);
             if (vehicle == null)
@@ -97,6 +97,23 @@ namespace DGT.WebApi.Controllers
             return Ok("Remaining driver points: " + remainingDriverPoints);
         }
 
+        // GET: api/infractions/top/5
+        [HttpGet]
+        [Route("api/infractions/top/{top}")]
+        public ActionResult<IEnumerable<TopInfraction>> GetTop(int top)
+        {
+            var list = vehicleInfractionService.GetTopInfractions(top);
+            return list?.ToList();
+        }
+
+        // GET: api/infractions/top
+        [HttpGet]
+        [Route("api/infractions/top")]
+        public ActionResult<IEnumerable<TopInfraction>> GetTopFive()
+        {
+            var list = vehicleInfractionService.GetTopInfractions(5);
+            return list?.ToList();
+        }
 
     }
 }

@@ -1,6 +1,7 @@
 ﻿using DGT.Data.Abstract;
 using DGT.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DGT.Services
 {
@@ -10,6 +11,7 @@ namespace DGT.Services
         IEnumerable<VehicleInfraction> GetInfractionsByVehicle(string vehicleId);
         VehicleInfraction GetVehicleInfraction(string vehicleInfractionId);
         int RegisterInfraction(VehicleInfraction vehicleInfraction);
+        IEnumerable<TopInfraction> GetTopInfractions(int top);
         void SaveVehicle();
     }
 
@@ -71,6 +73,21 @@ namespace DGT.Services
 
             return driver.Points;
         }
+
+
+        public IEnumerable<TopInfraction> GetTopInfractions(int top)
+        {
+            var topInfractions = (from vehicleInfractions in vehicleInfractionRepository.GetAll()
+                       group vehicleInfractions by vehicleInfractions.InfractionId into infractionsGroup
+                       select new TopInfraction
+                       {
+                           InfractionType = infractionsGroup.Key,
+                           Amount = infractionsGroup.Count(),
+                       }).Take(top).ToList();
+
+            return topInfractions;
+        }
+
 
         public void SaveVehicle()
         {

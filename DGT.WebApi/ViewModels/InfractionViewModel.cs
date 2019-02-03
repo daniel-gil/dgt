@@ -3,7 +3,7 @@ using System;
 
 namespace DGT.WebApi.ViewModels
 {
-    public class RegisterInfractionRequest
+    public class InfractionViewModel
     {
         [JsonProperty(PropertyName = "infraction_date")]
         public DateTime InfractionDate { get; set; }

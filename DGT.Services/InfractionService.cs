@@ -10,7 +10,6 @@ namespace DGT.Services
         IEnumerable<Infraction> GetInfractions();
         Infraction GetInfraction(string id);
         void CreateInfraction(Infraction infraction);
-        IEnumerable<Infraction> GetTopInfractions(int top);
         void SaveInfraction();
     }
 
@@ -37,31 +36,6 @@ namespace DGT.Services
         public IEnumerable<Infraction> GetInfractions()
         {
             return infractionRepository.GetAll();
-        }
-
-        public IEnumerable<Infraction> GetTopInfractions(int top)
-        {
-            /*
-            var winners = (from s in dc.Scores
-                           from u in dc.Users
-                           where (s.result) && (s.attackinguserid == u.userid)
-                           group s by u
-                            into groups
-                           select new
-                           {
-                               Username = groups.Key.username,
-                               Won = groups.Count()
-                           }).OrderByDescending(x => x.Seire).Distinct().Take(25).ToList();
-
-    */
-            var list = infractionRepository.GetAll()
-                                         .GroupBy(i => i.Id);
-            /*  var list = (from r in all
-                         .GroupBy(i => i.Id)
-                         where t.DeliverySelection == true && t.Delivery.SentForDelivery == null
-                         orderby t.Delivery.SubmissionDate
-                         select t).Take(top);*/
-            return null;
         }
 
         public void SaveInfraction()
