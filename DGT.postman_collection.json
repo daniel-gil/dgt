@@ -1,0 +1,604 @@
+{
+	"info": {
+		"_postman_id": "7eb514eb-bb6e-45d4-9d81-4ec19ca9fe82",
+		"name": "DGT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Drivers",
+			"item": [
+				{
+					"name": "Get Drivers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{dgt_endpoint}}/api/drivers",
+							"host": [
+								"{{dgt_endpoint}}"
+							],
+							"path": [
+								"api",
+								"drivers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Driver by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{dgt_endpoint}}/api/drivers/123456789Z",
+							"host": [
+								"{{dgt_endpoint}}"
+							],
+							"path": [
+								"api",
+								"drivers",
+								"123456789Z"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vehicles by DriverID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{dgt_endpoint}}/api/drivers/{{driver_id}}/vehicles",
+							"host": [
+								"{{dgt_endpoint}}"
+							],
+							"path": [
+								"api",
+								"drivers",
+								"{{driver_id}}",
+								"vehicles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Driver",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id\": \"4567KKD\",\n        \"name\": \"Juan\",\n        \"surname\": \"García\",\n        \"points\": 15\n    }"
+						},
+						"url": {
+							"raw": "{{dgt_endpoint}}/api/drivers",
+							"host": [
+								"{{dgt_endpoint}}"
+							],
+							"path": [
+								"api",
+								"drivers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehicles",
+			"item": [
+				{
+					"name": "Get Vehicles",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{dgt_endpoint}}/api/vehicles",
+							"host": [
+								"{{dgt_endpoint}}"
+							],
+							"path": [
+								"api",
+								"vehicles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vehicle by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{dgt_endpoint}}/api/vehicles/1111XYZ",
+							"host": [
+								"{{dgt_endpoint}}"
+							],
+							"path": [
+								"api",
+								"vehicles",
+								"1111XYZ"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Drivers by VehicleID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{dgt_endpoint}}/api/vehicles/{{vehicle_id}}/drivers",
+							"host": [
+								"{{dgt_endpoint}}"
+							],
+							"path": [
+								"api",
+								"vehicles",
+								"{{vehicle_id}}",
+								"drivers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Vehicle",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id\": \"0006665\",\n        \"license_plate\": \"5454535\",\n        \"brand\": \"Ferrari\",\n        \"model\": \"Testarosa\",\n        \"regular_drivers\" : [\"123456789Z\", \"987654321X\"]\n    }"
+						},
+						"url": {
+							"raw": "{{dgt_endpoint}}/api/vehicles",
+							"host": [
+								"{{dgt_endpoint}}"
+							],
+							"path": [
+								"api",
+								"vehicles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Infractions",
+			"item": [
+				{
+					"name": "Get Infractions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{dgt_endpoint}}/api/infractions",
+							"host": [
+								"{{dgt_endpoint}}"
+							],
+							"path": [
+								"api",
+								"infractions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Top Infractions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{dgt_endpoint}}/api/infractions/top",
+							"host": [
+								"{{dgt_endpoint}}"
+							],
+							"path": [
+								"api",
+								"infractions",
+								"top"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Top N Infractions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{dgt_endpoint}}/api/infractions/top/2",
+							"host": [
+								"{{dgt_endpoint}}"
+							],
+							"path": [
+								"api",
+								"infractions",
+								"top",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Infraction by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{dgt_endpoint}}/api/infractions/SPEEDING",
+							"host": [
+								"{{dgt_endpoint}}"
+							],
+							"path": [
+								"api",
+								"infractions",
+								"SPEEDING"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Infraction",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id\": \"SPEEDING2\",\n        \"description\": \"The driver was driving faster than the maximum speed allowed.\",\n        \"points_to_discount\":  4\n    }"
+						},
+						"url": {
+							"raw": "{{dgt_endpoint}}/api/infractions",
+							"host": [
+								"{{dgt_endpoint}}"
+							],
+							"path": [
+								"api",
+								"infractions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehicle Infractions",
+			"item": [
+				{
+					"name": "Get all Vehicles Infractions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{dgt_endpoint}}/api/vehicles/infractions",
+							"host": [
+								"{{dgt_endpoint}}"
+							],
+							"path": [
+								"api",
+								"vehicles",
+								"infractions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Infractions by Vehicle",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{dgt_endpoint}}/api/vehicles/{{vehicle_id}}/infractions",
+							"host": [
+								"{{dgt_endpoint}}"
+							],
+							"path": [
+								"api",
+								"vehicles",
+								"{{vehicle_id}}",
+								"infractions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vehicle Infraction by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{dgt_endpoint}}/api/vehicles/infractions/349f1dc3-f57d-4cc3-8bca-e712c0cd813e",
+							"host": [
+								"{{dgt_endpoint}}"
+							],
+							"path": [
+								"api",
+								"vehicles",
+								"infractions",
+								"349f1dc3-f57d-4cc3-8bca-e712c0cd813e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Top Drivers (infractions)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{dgt_endpoint}}/api/drivers/top/2/infractions",
+							"host": [
+								"{{dgt_endpoint}}"
+							],
+							"path": [
+								"api",
+								"drivers",
+								"top",
+								"2",
+								"infractions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register infraction (without Driver)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"infraction_date\": \"2019-01-23 18:35:00\"\n    }"
+						},
+						"url": {
+							"raw": "{{dgt_endpoint}}/api/vehicles/{{vehicle_id}}/infractions/RED_LIGHT",
+							"host": [
+								"{{dgt_endpoint}}"
+							],
+							"path": [
+								"api",
+								"vehicles",
+								"{{vehicle_id}}",
+								"infractions",
+								"RED_LIGHT"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register infraction (with Driver)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"infraction_date\": \"2019-01-23 18:35:00\",\n        \"driver_id\" : \"987654321X\"\n    }"
+						},
+						"url": {
+							"raw": "{{dgt_endpoint}}/api/vehicles/{{vehicle_id}}/infractions/RED_LIGHT",
+							"host": [
+								"{{dgt_endpoint}}"
+							],
+							"path": [
+								"api",
+								"vehicles",
+								"{{vehicle_id}}",
+								"infractions",
+								"RED_LIGHT"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
