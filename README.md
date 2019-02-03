@@ -382,9 +382,72 @@ RESPONSE:
 ]
 ```
 
-### Infraction types
-
 ### Vehicle infraction
+
+#### Get all infraction
+Retrieve all the infractions (of any vehicles).
+
+REQUEST:
+```
+GET {host}/api/vehicles/infractions
+```
+
+RESPONSE:
+```
+[
+    {
+        "id": "7bd4e5e6-2cf5-4470-848b-c0f22f2d9b6c",
+        "infraction_date": "2019-02-03T09:29:47.9877115",
+        "vehicle_id": "0004",
+        "driver_id": "123456789Z",
+        "infraction_id": "RECKLESS"
+    },
+    {
+        "id": "9ecf6a3e-7742-4f77-bf74-1db65950779e",
+        "infraction_date": "2019-02-03T09:29:47.8622201",
+        "vehicle_id": "0001",
+        "driver_id": "123456789Z",
+        "infraction_id": "SPEEDING"
+    },
+    {
+        "id": "c29b7d4e-deca-471e-8144-92137cf08fe7",
+        "infraction_date": "2019-02-03T09:29:47.8604376",
+        "vehicle_id": "0001",
+        "driver_id": "123456789Z",
+        "infraction_id": "RED_LIGHT"
+    }
+]
+```
+
+
+#### Get infractions by vehicle
+Retrieve all the infractions for a given vehicle.
+
+REQUEST:
+```
+GET {host}/api/vehicles/0001/infractions
+```
+
+RESPONSE:
+```
+[
+    {
+        "id": "e60db0e6-6e3d-43e6-aa7f-cefd814f49b2",
+        "infraction_date": "2019-02-03T15:18:30.2041449",
+        "vehicle_id": "0001",
+        "driver_id": "123456789Z",
+        "infraction_id": "SPEEDING"
+    },
+    {
+        "id": "eec60776-db13-4587-bdfe-8e851f113e24",
+        "infraction_date": "2019-02-03T15:18:30.2040403",
+        "vehicle_id": "0001",
+        "driver_id": "123456789Z",
+        "infraction_id": "RED_LIGHT"
+    }
+]
+```
+
 
 
 
