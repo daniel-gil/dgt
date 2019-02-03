@@ -218,6 +218,36 @@ RESPONSE
 }
 ```
 
+
+#### Get vehicle's drivers
+Retrieve the regular drivers associated to a vehicle
+
+REQUEST:
+```
+GET {host}/api/vehicles/0001/drivers
+```
+
+RESPONSE
+```
+[
+    {
+        "id": "123456789Z",
+        "name": "John",
+        "surname": "Smith",
+        "points": 10,
+        "num_vehicles": 1
+    },
+    {
+        "id": "987654321X",
+        "name": "Alice",
+        "surname": "Conor",
+        "points": 8,
+        "num_vehicles": 1
+    }
+]
+```
+
+
 ### Infraction types
 
 ### Vehicle infraction
