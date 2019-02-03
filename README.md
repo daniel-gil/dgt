@@ -199,7 +199,7 @@ RESPONSE
 #### Add new vehicle
 Creates a new vehicle. 
 
-**Note**: the first regular driver in the list will be set as the main regular driver.
+**Note**: we can have more than one regular driver for a vehicle, and the first regular driver in the list will be set as the main regular driver.
 
 REQUEST:
 ```
