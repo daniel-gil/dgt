@@ -31,7 +31,7 @@ The project DGT.Data includes a file called `DgtDbInitializer.cs` which initiali
 Besides this readme file, when launching the solution, it can be read the online documentation under the route `/swagger`. It is using the swagger open-source documentation framework.
 
 ## Postman
-It can be found in this repository a Postman file with all the available operations. You can import this file in your Postman application, launch the .Net Core solution and start testing it.
+It can be found in this repository the Postman file (DGT.postman_collection.json)[https://github.com/daniel-gil/dgt/blob/master/DGT.postman_collection.json] with all the available operations. You can import this file in your Postman application, launch the .Net Core solution and start testing it.
 
 **Note**: the enpoint in the postman tests are defined like this: `{{dgt_endpoint}}/api/`, it has to be declared the variable `dgt_endpoint` in the Postman Environment to something like that (if launched locally): `https://localhost:44372`.  
 
