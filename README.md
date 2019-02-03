@@ -474,7 +474,7 @@ Retrieve the N drivers with the most infractions.
 
 REQUEST:
 ```
-GET {host}/api/drivers/top/1/infractions
+GET {host}/api/drivers/top/2/infractions
 ```
 
 RESPONSE:
@@ -494,18 +494,40 @@ RESPONSE:
 
 
 
-#### xxx
-xxx
+#### Add new infraction
+Register a new vehicle infraction. The response returns the remaining driver points once applied the infraction.
 
+We can specify in the body request the driver ID to which to associate the infraction like this:
 
 REQUEST:
 ```
-GET {host}/api/xxxx
+POST {host}/api/vehicles/0001/infractions/RED_LIGHT
+Body:
+    {
+        "infraction_date": "2019-01-23 18:35:00",
+        "driver_id" : "987654321X"
+    }
 ```
 
 RESPONSE:
 ```
-xxxx
+Remaining driver points: 10
+```
+
+Or avoid passing the driver ID (because maybe we do not have this information), and in this case, the infraction will be associated to the main regular driver (stored in the Driver entity):
+
+REQUEST:
+```
+POST {host}/api/vehicles/0001/infractions/RED_LIGHT
+Body:
+    {
+        "infraction_date": "2019-01-23 18:35:00"
+    }
+```
+
+RESPONSE:
+```
+Remaining driver points: 10
 ```
 
 
