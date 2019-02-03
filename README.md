@@ -15,7 +15,7 @@ __________                  _________________           ___________             
 This project has been developed using Visual Studio 2017, ASP.NET Core 2.2 and EntityFrameworkCore 2.2, with the migrations enabled.
 
 ### Structure
-The solution follows the clean architecture and is structured in the following projects: Models, Data, Services and WebApi.
+The solution follows the clean architecture and is structured in the following projects: Models, Data, Services, WebApi and UnitTests.
 
 #### DGT.Models
 It's a class library which contain all the domain objects. Those objects will be used by the EntityFramework to build the database.
