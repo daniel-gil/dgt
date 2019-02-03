@@ -229,6 +229,8 @@ If the vehicle already exists, we receive the HTTP error code `409 Conflict` and
 
 If any regular driver ID from the request does not exists, we receive the HTTP error code `400 Bad Request` and the error message `the driver 'NON-EXISTENT_ID' does not exists`.
 
+If the driver has reached the maximal number of allowed vehicles, we will receive the HTTP error code `422 Unprocessable Entity` and the error message `this driver has reached the maximal number of vehicles (10)`.
+
 #### Get vehicle's drivers
 Retrieve the regular drivers associated to a vehicle
 
