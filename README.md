@@ -1,4 +1,5 @@
 # DGT System
+The main functionality of the DGT System is to manage the traffic violations and the driving license points. For this purpose, it handles the following entities: Vehicles, Drivers, Driver's vehicle (maximal allowed is 10), Infraction types and Driver's infractions.
 
 ## .Net Core Solution
 This solution uses Entity Framework Core with the migrations enabled.
@@ -246,6 +247,57 @@ RESPONSE
     }
 ]
 ```
+
+
+### Infraction types
+
+#### Get all infraction types
+Retrieve all the registered infraction types.
+
+REQUEST:
+```
+GET {host}/api/infractions
+```
+
+RESPONSE:
+```
+[
+    {
+        "id": "RECKLESS",
+        "description": "Reckless driving.",
+        "points_to_discount": 7
+    },
+    {
+        "id": "RED_LIGHT",
+        "description": "Failure to stop at a red light or traffic sign.",
+        "points_to_discount": 5
+    },
+    {
+        "id": "SPEEDING",
+        "description": "The driver was driving faster than the maximum speed allowed.",
+        "points_to_discount": 3
+    }
+]
+```
+
+
+#### Get an infraction types by ID
+Retrieve the infraction type by its ID.
+
+REQUEST:
+```
+GET {host}/api/infractions/SPEEDING
+```
+
+RESPONSE:
+```
+{
+    "id": "SPEEDING",
+    "description": "The driver was driving faster than the maximum speed allowed.",
+    "points_to_discount": 3
+}
+```
+
 
 
 ### Infraction types
