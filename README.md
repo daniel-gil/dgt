@@ -115,6 +115,9 @@ RESPONSE:
 }
 ```
 
+If the driver ID already exists in the system, we receive the following error response: `422 Unprocessable Entity`.
+```the driver already exists```
+
 #### Get driver's vehicles
 Retrieve the vehicles associated to a driver.
 
