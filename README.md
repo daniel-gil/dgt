@@ -189,6 +189,35 @@ RESPONSE
 }
 ```
 
+#### Add new vehicle
+Creates a new vehicle. 
+
+**Note**: the first regular driver in the list will be set as the main regular driver.
+
+REQUEST:
+```
+POST {host}/api/vehicles
+Body:
+    {
+        "id": "0006665",
+        "license_plate": "5454535",
+        "brand": "Ferrari",
+        "model": "Testarosa",
+        "regular_drivers" : ["123456789Z", "987654321X"]
+    }
+```
+
+RESPONSE
+```
+{
+    "id": "0006665",
+    "license_plate": "5454535",
+    "brand": "Ferrari",
+    "model": "Testarosa",
+    "main_regular_driver_id": "123456789Z"
+}
+```
+
 ### Infraction types
 
 ### Vehicle infraction
