@@ -1,6 +1,14 @@
 # DGT System
 The main functionality of the DGT System is to manage the traffic violations and the driving license points. For this purpose, it handles the following entities: Vehicles, Drivers, Driver's vehicle (maximal allowed is 10), Infraction types and Driver's infractions.
 
+The data model applied is the following:
+
+__________                  _________________           ___________             ______________           __________________
+| Driver | 1  <---> (0..10) | VehicleDriver | N <---> 1 | Vehicle | 1  <--->  N | Infraction | N <---> 1 | InfractionType |
+----------                  -----------------           -----------             --------------           ------------------
+    ^ 1                                                                             N ^
+    |_________________________________________________________________________________|       
+
 ## .Net Core Solution
 This solution uses Entity Framework Core with the migrations enabled.
 
